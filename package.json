@@ -1,0 +1,10 @@
+{
+  "name": "babar-ali-khan-portfolio",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build-frontend.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

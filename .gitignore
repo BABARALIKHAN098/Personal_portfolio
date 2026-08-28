@@ -13,3 +13,4 @@ model-cache/
 evaluation_results.json
 dist/
 .netlify/
+.vercel/

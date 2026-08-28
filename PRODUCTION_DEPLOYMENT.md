@@ -2,7 +2,7 @@
 
 ## Recommended topology
 
-- **Frontend:** Netlify static site built from the allowlisted `dist/` output.
+- **Frontend:** Vercel static site built from the allowlisted `dist/` output.
 - **Backend:** Render Docker web service defined by `render.yaml`.
 - **Knowledge retrieval:** Existing Pinecone index and `portfolio-production` namespace.
 - **Generation:** Groq model configured through backend environment variables.
@@ -26,21 +26,21 @@ Never commit `.env`. If a real key was ever pushed, rotate it immediately.
 
 1. Create a Render Blueprint from the GitHub repository. Render will read `render.yaml`.
 2. Add the secret values `GROQ_API_KEY` and `PINECONE_API_KEY` when prompted.
-3. Add `ALLOWED_ORIGINS=https://YOUR-NETLIFY-DOMAIN`.
+3. Add `ALLOWED_ORIGINS=https://YOUR-VERCEL-DOMAIN`.
 4. Add `ALLOWED_HOSTS=YOUR-RENDER-SERVICE.onrender.com`.
 5. Deploy and wait for `/health` to return HTTP 200.
 6. Copy the final HTTPS backend URL.
 
 The service runs one worker so MiniLM loads once. The image downloads MiniLM during its build and runs as a non-root user.
 
-## 3. Deploy the Netlify frontend
+## 3. Deploy the Vercel frontend
 
-1. Import the same GitHub repository into Netlify.
-2. Netlify reads `netlify.toml` and publishes only the allowlisted `dist/` directory.
+1. Import the same GitHub repository at `https://vercel.com/new`.
+2. Vercel reads `vercel.json`, runs `npm run build`, and publishes only the allowlisted `dist/` directory.
 3. Configure `PUBLIC_CHAT_API_URL=https://YOUR-RENDER-SERVICE.onrender.com`.
-4. Configure `SITE_URL=https://YOUR-NETLIFY-DOMAIN`.
+4. Optionally configure `SITE_URL=https://YOUR-CUSTOM-DOMAIN`. If omitted, the build uses Vercel's production project URL.
 5. Deploy the site.
-6. Ensure Render's `ALLOWED_ORIGINS` exactly matches the final Netlify origin without a trailing slash.
+6. Ensure Render's `ALLOWED_ORIGINS` exactly matches the final Vercel origin without a trailing slash, then redeploy the backend if the value changed.
 
 ## 4. Production verification
 
@@ -68,7 +68,7 @@ Do not expose ingestion as a public endpoint.
 
 ## 6. Rollback
 
-- Restore the previous successful Netlify deploy for frontend failures.
+- Promote the previous successful Vercel deployment for frontend failures.
 - Restore the previous successful Render deploy for backend failures.
 - Re-run ingestion with the prior reviewed Markdown version for knowledge failures.
 - Rotate keys and update Render secrets if exposure is suspected.
@@ -76,8 +76,8 @@ Do not expose ingestion as a public endpoint.
 ## Values needed before publishing
 
 - GitHub repository/account authorization
-- Final Netlify or custom domain
+- Final Vercel or custom domain
 - Final Render service hostname
 - Production `ALLOWED_ORIGINS`
 - Production `ALLOWED_HOSTS`
-- Render and Netlify account authorization
+- Render and Vercel account authorization
