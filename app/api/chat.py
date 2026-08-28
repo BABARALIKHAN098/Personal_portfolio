@@ -13,6 +13,7 @@ router = APIRouter(tags=["chat"])
 
 
 @router.post("/chat", response_model=ChatResponse)
+@router.post("/api/chat", response_model=ChatResponse, include_in_schema=False)
 async def chat(payload: ChatRequest, request: Request) -> ChatResponse:
     request_id = uuid4().hex[:16]
     request.app.state.rate_limiter.check(client_key(request, payload.session_id))

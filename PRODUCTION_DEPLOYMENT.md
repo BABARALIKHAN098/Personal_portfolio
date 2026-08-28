@@ -1,15 +1,14 @@
 # Production Deployment Runbook
 
-## Recommended topology
+## Deployment topology
 
 - **Frontend:** Vercel static site built from the allowlisted `dist/` output.
-- **Backend:** Render Docker web service defined by `render.yaml`.
+- **Backend:** FastAPI running as the same Vercel project's `/api` function.
 - **Knowledge retrieval:** Existing Pinecone index and `portfolio-production` namespace.
 - **Generation:** Groq model configured through backend environment variables.
+- **Query embeddings:** Hugging Face hosted inference using the same normalized `all-MiniLM-L6-v2` vectors as the existing Pinecone index.
 
-The frontend and backend are separate so the portfolio stays fast and backend secrets never enter browser assets.
-
-The backend Blueprint uses Render's `1c-2g` paid compute plan. Local measurement after MiniLM loaded was approximately 518 MB working set and 744 MB private memory, so a 512 MB free/starter instance is not safe for this architecture. Do not create the service until the hosting cost is approved.
+The local PyTorch embedding runtime has been replaced for production so the backend fits Vercel's Python function bundle. All API credentials remain server-side.
 
 ## 1. Publish the repository
 
@@ -22,25 +21,16 @@ git status --short
 
 Never commit `.env`. If a real key was ever pushed, rotate it immediately.
 
-## 2. Deploy the Render backend
-
-1. Create a Render Blueprint from the GitHub repository. Render will read `render.yaml`.
-2. Add the secret values `GROQ_API_KEY` and `PINECONE_API_KEY` when prompted.
-3. Add `ALLOWED_ORIGINS=https://YOUR-VERCEL-DOMAIN`.
-4. Add `ALLOWED_HOSTS=YOUR-RENDER-SERVICE.onrender.com`.
-5. Deploy and wait for `/health` to return HTTP 200.
-6. Copy the final HTTPS backend URL.
-
-The service runs one worker so MiniLM loads once. The image downloads MiniLM during its build and runs as a non-root user.
-
-## 3. Deploy the Vercel frontend
+## 2. Deploy the full application on Vercel
 
 1. Import the same GitHub repository at `https://vercel.com/new`.
 2. Vercel reads `vercel.json`, runs `npm run build`, and publishes only the allowlisted `dist/` directory.
-3. Configure `PUBLIC_CHAT_API_URL=https://YOUR-RENDER-SERVICE.onrender.com`.
-4. Optionally configure `SITE_URL=https://YOUR-CUSTOM-DOMAIN`. If omitted, the build uses Vercel's production project URL.
-5. Deploy the site.
-6. Ensure Render's `ALLOWED_ORIGINS` exactly matches the final Vercel origin without a trailing slash, then redeploy the backend if the value changed.
+3. Add `GROQ_API_KEY`, `PINECONE_API_KEY`, and `HF_TOKEN` as Vercel secrets.
+4. Add `APP_ENVIRONMENT=production`, `ALLOWED_ORIGINS=https://YOUR-VERCEL-DOMAIN`, and `ALLOWED_HOSTS=YOUR-VERCEL-HOSTNAME`.
+5. Add the remaining non-secret model and Pinecone values from `.env.example` if they differ from the defaults.
+6. Leave `PUBLIC_CHAT_API_URL` unset so the browser uses the same-origin `/api/chat` endpoint.
+7. Optionally configure `SITE_URL=https://YOUR-CUSTOM-DOMAIN`. If omitted, the build uses Vercel's production project URL.
+8. Deploy, then confirm `/api/health` returns HTTP 200.
 
 ## 4. Production verification
 
@@ -68,16 +58,15 @@ Do not expose ingestion as a public endpoint.
 
 ## 6. Rollback
 
-- Promote the previous successful Vercel deployment for frontend failures.
-- Restore the previous successful Render deploy for backend failures.
+- Promote the previous successful Vercel deployment for frontend or backend failures.
 - Re-run ingestion with the prior reviewed Markdown version for knowledge failures.
-- Rotate keys and update Render secrets if exposure is suspected.
+- Rotate keys and update Vercel secrets if exposure is suspected.
 
 ## Values needed before publishing
 
 - GitHub repository/account authorization
 - Final Vercel or custom domain
-- Final Render service hostname
 - Production `ALLOWED_ORIGINS`
 - Production `ALLOWED_HOSTS`
-- Render and Vercel account authorization
+- Hugging Face token with Inference Providers permission
+- Vercel account authorization

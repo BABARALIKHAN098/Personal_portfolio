@@ -26,8 +26,10 @@ class Settings(BaseSettings):
     pinecone_namespace: str = "portfolio-production"
     pinecone_cloud: str = "aws"
     pinecone_region: str = "us-east-1"
+    hf_token: str | None = Field(default=None, repr=False)
     embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"
     embedding_dimension: int = 384
+    embedding_timeout_seconds: float = Field(default=20, ge=2, le=60)
     retrieval_top_k: int = Field(default=5, ge=1, le=20)
     retrieval_score_threshold: float = Field(default=0.30, ge=0, le=1)
     retrieval_context_tokens: int = Field(default=1400, ge=300, le=5000)
@@ -45,7 +47,7 @@ class Settings(BaseSettings):
 
     @property
     def integrations_configured(self) -> bool:
-        return bool(self.groq_api_key and self.pinecone_api_key)
+        return bool(self.groq_api_key and self.pinecone_api_key and self.hf_token)
 
     @property
     def production(self) -> bool:
@@ -55,7 +57,7 @@ class Settings(BaseSettings):
     def validate_production(self):
         if self.production:
             if not self.integrations_configured:
-                raise ValueError("Production requires Groq and Pinecone credentials")
+                raise ValueError("Production requires Groq, Pinecone, and Hugging Face credentials")
             if not self.allowed_origins or any("localhost" in origin or "127.0.0.1" in origin for origin in self.allowed_origins):
                 raise ValueError("Production ALLOWED_ORIGINS must contain only public HTTPS origins")
             if any(not origin.startswith("https://") for origin in self.allowed_origins):

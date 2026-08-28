@@ -9,6 +9,7 @@ def clean_environment(monkeypatch):
     # unit tests never contact paid or external services.
     monkeypatch.setenv("GROQ_API_KEY", "")
     monkeypatch.setenv("PINECONE_API_KEY", "")
+    monkeypatch.setenv("HF_TOKEN", "")
     from app.core.config import get_settings
     get_settings.cache_clear()
     yield

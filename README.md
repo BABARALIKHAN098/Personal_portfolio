@@ -15,12 +15,12 @@ Published metrics are shown only where documented in the source repository. Proj
 
 ## Portfolio chatbot
 
-The repository includes a FastAPI Retrieval-Augmented Generation (RAG) backend and an accessible vanilla-JavaScript chat widget. The backend embeds the verified Markdown knowledge base with `sentence-transformers/all-MiniLM-L6-v2`, retrieves relevant chunks from Pinecone, and asks a configurable Groq model to answer only from that evidence.
+The repository includes a FastAPI Retrieval-Augmented Generation (RAG) backend and an accessible vanilla-JavaScript chat widget. The backend requests normalized `sentence-transformers/all-MiniLM-L6-v2` embeddings from Hugging Face hosted inference, retrieves relevant chunks from Pinecone, and asks a configurable Groq model to answer only from that evidence.
 
 ### Architecture
 
 ```text
-Portfolio visitor → chatbot.js → FastAPI /chat → MiniLM embedding
+Portfolio visitor → chatbot.js → FastAPI /api/chat → hosted MiniLM embedding
                   → Pinecone retrieval → Groq generation → answer + approved links
 ```
 
@@ -73,8 +73,8 @@ The widget reads the backend URL from the `data-chat-api` attribute on `<body>` 
 
 ### API
 
-- `GET /health` reports safe readiness booleans without exposing credentials.
-- `POST /chat` accepts a message, anonymous session ID, and up to six recent user/assistant history messages.
+- `GET /api/health` reports safe readiness booleans without exposing credentials.
+- `POST /api/chat` accepts a message, anonymous session ID, and up to six recent user/assistant history messages.
 - No public ingestion endpoint exists.
 
 Interactive API documentation is available at `http://127.0.0.1:8001/docs` while the backend runs locally.

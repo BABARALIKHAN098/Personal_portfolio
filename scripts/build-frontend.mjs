@@ -16,7 +16,6 @@ for(const file of await readdir(root))if(file.toLowerCase().endsWith('.pdf'))awa
 const isProduction=process.env.CONTEXT==='production'||process.env.VERCEL_ENV==='production';
 const api=(process.env.PUBLIC_CHAT_API_URL||'').trim().replace(/\/$/,'');
 if(api&&!/^https:\/\//.test(api))throw new Error('PUBLIC_CHAT_API_URL must use HTTPS');
-if(isProduction&&!api)throw new Error('PUBLIC_CHAT_API_URL is required for a production build');
 await writeFile(path.join(dist,'chatbot-runtime-config.js'),`window.PORTFOLIO_CHAT_API_URL = ${JSON.stringify(api)};\n`,'utf8');
 const vercelProductionUrl=process.env.VERCEL_PROJECT_PRODUCTION_URL?`https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`:'';
 const siteUrl=(process.env.SITE_URL||vercelProductionUrl).trim().replace(/\/$/,'');
