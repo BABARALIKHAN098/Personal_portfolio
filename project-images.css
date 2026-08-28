@@ -1,0 +1,54 @@
+.project-photo {
+  background: #0f172a;
+  padding: 0;
+}
+
+.project-photo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform .35s ease;
+}
+
+.project-card:hover .project-photo img {
+  transform: scale(1.025);
+}
+
+.project-photo > span {
+  position: absolute;
+  z-index: 1;
+  left: 14px;
+  top: 14px;
+  padding: 7px 9px;
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(15, 23, 42, .84);
+  box-shadow: 0 4px 18px rgba(15, 23, 42, .25);
+  backdrop-filter: blur(8px);
+}
+
+.demo-heading { margin: 64px 0 20px; }
+.demo-heading h3 { margin: 4px 0 0; font-size: clamp(28px, 4vw, 42px); letter-spacing: -.04em; }
+.demo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.demo-grid article { overflow: hidden; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); }
+.gallery-video-open { position: relative; display: block; width: 100%; padding: 0; border: 0; aspect-ratio: 16 / 9; overflow: hidden; cursor: pointer; background: #0f172a; }
+.gallery-video-open img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.gallery-video-open i { position: absolute; left: 50%; top: 50%; display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; transform: translate(-50%, -50%); background: rgba(255,255,255,.94); color: var(--blue); font-style: normal; font-size: 22px; box-shadow: 0 12px 32px rgba(15,23,42,.3); transition: transform .2s ease; }
+.gallery-video-open:hover i { transform: translate(-50%, -50%) scale(1.08); }
+.mental-demo { background: linear-gradient(135deg,#172554,#2563eb); color: #fff; }
+.mental-demo > span { color: #fff; font: 700 clamp(24px,4vw,42px)/1.05 "Space Grotesk"; letter-spacing: -.04em; text-transform: none; }
+.demo-grid article > div { padding: 18px 20px 20px; }
+.demo-grid span { color: var(--blue); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.demo-grid h3 { margin: 5px 0 0; font-size: 21px; }
+
+@media (max-width: 720px) {
+  .demo-grid { grid-template-columns: 1fr; }
+}
+
+.video-dialog { width: min(1050px, calc(100% - 28px)); padding: 20px; overflow: visible; background: #080f1e; color: #fff; }
+.video-dialog .video-modal-head { padding: 4px 44px 14px 4px; }
+.video-dialog h2 { margin: 3px 0 0; font-size: clamp(24px, 4vw, 38px); }
+.video-dialog video { display: block; width: 100%; max-height: 72vh; aspect-ratio: 16 / 9; object-fit: contain; border-radius: 12px; background: #000; }
+.video-close { position: absolute; z-index: 2; right: 14px; top: 12px; width: 38px; height: 38px; border: 0; border-radius: 50%; background: #fff; color: #0f172a; font-size: 25px; cursor: pointer; }

@@ -1,0 +1,39 @@
+services:
+  - type: web
+    name: babar-portfolio-chatbot-api
+    runtime: docker
+    plan: 1c-2g
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: APP_ENVIRONMENT
+        value: production
+      - key: EXPOSE_API_DOCS
+        value: "false"
+      - key: PRELOAD_EMBEDDING_MODEL
+        value: "true"
+      - key: VALIDATE_PINECONE_ON_STARTUP
+        value: "true"
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GROQ_MODEL
+        value: qwen/qwen3.8-27b
+      - key: PINECONE_API_KEY
+        sync: false
+      - key: PINECONE_INDEX_NAME
+        value: personal-portfolio-chatbot
+      - key: PINECONE_NAMESPACE
+        value: portfolio-production
+      - key: EMBEDDING_MODEL
+        value: sentence-transformers/all-MiniLM-L6-v2
+      - key: EMBEDDING_DIMENSION
+        value: "384"
+      - key: RETRIEVAL_TOP_K
+        value: "5"
+      - key: RETRIEVAL_SCORE_THRESHOLD
+        value: "0.30"
+      - key: ALLOWED_ORIGINS
+        sync: false
+      - key: ALLOWED_HOSTS
+        sync: false

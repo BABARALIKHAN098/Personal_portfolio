@@ -1,0 +1,22 @@
+#about .about-grid{grid-template-columns:minmax(300px,.92fr) minmax(0,1.08fr);gap:clamp(52px,7vw,92px);align-items:center}
+#about .portrait{max-width:500px}
+#about .portrait::before{content:"";position:absolute;inset:16px -16px -16px 16px;z-index:-1;border:1px solid #bed2ec;border-radius:28px}
+#about .portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top;border:1px solid #c7d7ea;border-radius:24px;box-shadow:0 20px 50px rgba(16,24,40,.14)}
+#about .about-copy h2{max-width:700px;margin:10px 0 24px;font-size:clamp(38px,4.6vw,59px)}
+#about .about-description{max-width:760px}
+#about .about-description p{margin-bottom:15px;color:var(--muted);line-height:1.75}
+#about .about-description strong{color:var(--ink)}
+#about .about-project-link{color:var(--blue);font-weight:800;text-decoration:underline;text-decoration-color:#a9c9f4;text-underline-offset:4px;transition:color .2s ease,text-decoration-color .2s ease}
+#about .about-project-link:hover{color:#1e40af;text-decoration-color:currentColor}
+#about .about-project-link:focus-visible,#about .about-social-link:focus-visible{outline:3px solid rgba(37,99,235,.28);outline-offset:4px;border-radius:4px}
+#about .about-facts{grid-template-columns:.8fr 1.1fr 1.6fr;gap:0;margin:30px 0 26px;padding:0;border-block:1px solid #d5dfeb}
+#about .about-facts>div{padding:18px 20px}
+#about .about-facts>div:first-child{padding-left:0}
+#about .about-facts>div+div{border-left:1px solid #d5dfeb}
+#about .about-facts dt{margin-bottom:7px}
+#about .about-facts dd{line-height:1.45}
+#about .about-actions{margin:0;gap:10px}
+#about .about-social-link{display:inline-flex;align-items:center;min-height:44px;padding:10px 11px;color:#344054;font-weight:750;transition:color .2s ease,transform .2s ease}
+#about .about-social-link:hover{color:var(--blue);transform:translateY(-2px)}
+@media(max-width:900px){#about .about-grid{grid-template-columns:1fr;gap:54px}#about .portrait{width:min(100%,500px)}}
+@media(max-width:640px){#about .about-grid{gap:42px}#about .portrait::before{inset:10px -10px -10px 10px}#about .about-copy h2{font-size:clamp(36px,11vw,48px)}#about .about-facts{grid-template-columns:1fr}#about .about-facts>div{padding:15px 0}#about .about-facts>div+div{border-left:0;border-top:1px solid #d5dfeb}#about .about-actions{align-items:stretch}#about .about-actions .btn{flex:1 1 100%}}
