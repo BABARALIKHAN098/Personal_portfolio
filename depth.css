@@ -1,0 +1,129 @@
+/* Blueprint depth: static surfaces first; motion is an optional enhancement. */
+:root {
+  --depth-shadow: 0 3px 7px rgba(16, 24, 40, .035), 0 16px 36px rgba(30, 64, 175, .075);
+  --depth-ease: cubic-bezier(.2, .7, .2, 1);
+}
+/* Clip only the pre-existing oversized background ornaments at section edges. */
+.hero, .contact-section { overflow: clip; }
+.depth-surface {
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --light-x: 50%;
+  --light-y: 30%;
+  --depth-lift: 0px;
+  transform-style: preserve-3d;
+  transition: transform .45s var(--depth-ease), box-shadow .35s ease, border-color .35s ease, opacity .55s ease;
+}
+.depth-surface.visible {
+  transform: perspective(1400px) translateY(var(--depth-lift)) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+}
+.depth-layer { transform: translateZ(var(--layer-z, 12px)); }
+.depth-surface.depth-tracking { transition-duration: .12s, .35s, .35s, .55s; }
+
+/* The panel and its workflow share a 3D coordinate space. */
+.system-action.depth-surface {
+  position: relative;
+  background: radial-gradient(ellipse at var(--light-x) var(--light-y), #eaf3ff, #f9fbff 68%);
+  box-shadow: inset 0 1px 0 #fff, 0 5px 0 -2px #e4ecf8, 0 9px 0 -4px #d3e0f2, 0 28px 65px rgba(30, 64, 175, .13);
+}
+.system-action .action-flow, .system-action .action-step { transform-style: preserve-3d; }
+.system-action .action-step {
+  transform: translateZ(var(--layer-z, 12px));
+  background: linear-gradient(130deg, #fff, #f3f8ff);
+  border-color: #98b9ec;
+  box-shadow: inset 0 1px 0 #fff, 0 3px 0 -1px #dbe8fa, 0 8px 18px rgba(37, 99, 235, .09);
+}
+.system-action .action-step i { transform: translateZ(7px); box-shadow: inset 0 1px 0 #fff, 0 4px 8px rgba(37, 99, 235, .1); }
+.system-action .action-step:nth-child(2) { --layer-z: 20px; }
+.system-action .action-step:nth-child(3) { --layer-z: 32px; border-color: #6e9fe8; }
+.system-action .action-step:nth-child(4) { --layer-z: 24px; }
+.system-action .action-step:nth-child(5) { --layer-z: 38px; }
+.system-action .system-head { --layer-z: 16px; }
+.system-action .system-stats { --layer-z: 10px; }
+
+/* Keep the card unclipped for depth; the image retains its original crop. */
+.project-card.depth-surface { position: relative; overflow: visible; box-shadow: var(--depth-shadow); }
+.project-card.depth-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid transparent;
+  border-radius: inherit;
+  background: radial-gradient(260px circle at var(--light-x) var(--light-y), rgba(96, 165, 250, .1), transparent 75%);
+  pointer-events: none;
+  transform: translateZ(2px);
+}
+.project-card .project-art { --layer-z: 10px; border-radius: 19px 19px 0 0; overflow: clip; }
+.project-card .project-photo img { border-radius: inherit; }
+.project-card .project-photo > span { transform: translateZ(12px); }
+.project-card .project-art, .project-card .project-body { transform-style: preserve-3d; }
+.project-card .project-body { --layer-z: 16px; }
+.project-card .card-actions { transform: translateZ(8px); }
+.project-card .tags, .project-card .project-top { transform: translateZ(4px); }
+.project-card.depth-surface:focus-within { border-color: #87afe5; box-shadow: var(--depth-shadow), 0 0 0 2px var(--ring); }
+
+/* Progressive process depth is expressed through the nodes, not tilted text. */
+.process-flow { perspective: 1100px; }
+.process-step { --node-z: 2px; transform-style: preserve-3d; }
+.process-step:nth-child(2) { --node-z: 4px; }
+.process-step:nth-child(3) { --node-z: 6px; }
+.process-step:nth-child(4) { --node-z: 8px; }
+.process-step:nth-child(5) { --node-z: 10px; }
+.process-step:nth-child(6) { --node-z: 14px; }
+.process-flow .process-icon { transform: translateZ(var(--node-z)); box-shadow: 0 0 0 1px #c6d6e9, 0 3px 0 #d8e5f6, 0 8px 13px rgba(30, 64, 175, .14); }
+.process-step:not(:last-child)::after { content: ""; position: absolute; top: 26px; left: 62%; width: 76%; height: 2px; background: var(--blue2); box-shadow: 0 0 8px rgba(37, 99, 235, .2); opacity: 0; pointer-events: none; transition: opacity .25s; }
+.process-step:last-child { box-shadow: 0 4px 0 -1px #c1d6f3, 0 12px 24px rgba(37, 99, 235, .2); }
+.depth-card { box-shadow: var(--depth-shadow); transition: transform .3s var(--depth-ease), box-shadow .3s ease, border-color .3s ease, opacity .55s ease; }
+.depth-card .skill-icon, .depth-card .cert-mark, .depth-card .journey-meta span { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8), 0 2px 0 #dce7f4, 0 6px 12px rgba(30, 64, 175, .08); }
+
+/* Two thin drawing planes frame the unchanged portrait. */
+#about .portrait.depth-surface { position: relative; }
+#about .portrait.depth-surface::before { inset: 12px -12px -12px 12px; z-index: -1; transform: translateZ(-10px); background: rgba(239, 246, 255, .4); }
+#about .portrait.depth-surface::after { content: ""; position: absolute; inset: 23px -23px -23px 23px; z-index: -2; border: 1px solid rgba(147, 180, 223, .45); border-radius: 28px; transform: translateZ(-24px); pointer-events: none; }
+#about .portrait.depth-surface img { transform: translateZ(8px); }
+
+/* Three small decorative drawings, clipped independently of content. */
+.depth-atmosphere { position: absolute; inset: 0; overflow: clip; pointer-events: none; z-index: -1; }
+.depth-drawing { position: absolute; width: clamp(110px, 13vw, 180px); height: auto; color: var(--blue); opacity: .09; transform: translateY(var(--parallax-y, 0px)); }
+.depth-drawing path, .depth-drawing circle, .depth-drawing ellipse { fill: none; stroke: currentColor; stroke-width: 1; }
+.hero .depth-drawing { right: 2%; top: 9%; }
+#about .depth-drawing { right: 2%; bottom: 7%; }
+#contact .depth-drawing { left: 1%; top: 6%; }
+.btn-primary:active:not(:disabled) { transform: translateY(1px); box-shadow: inset 0 2px 3px rgba(17, 24, 39, .12), 0 1px 3px rgba(37, 99, 235, .15); }
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .depth-surface.depth-tracking { will-change: transform; }
+  .project-card.depth-surface:hover { --depth-lift: -8px; border-color: #9abcea; box-shadow: 0 5px 10px rgba(30, 64, 175, .045), 0 24px 48px rgba(30, 64, 175, .13); }
+  .depth-card:hover, .depth-card:focus-within { transform: translateY(-4px); box-shadow: 0 4px 8px rgba(30, 64, 175, .035), 0 19px 34px rgba(30, 64, 175, .1); }
+  .process-step:hover::after { opacity: .8; }
+  .system-action.depth-surface { animation: blueprint-float 8s ease-in-out infinite; animation-play-state: paused; }
+  .system-action.depth-in-view { animation-play-state: running; }
+  .system-action.depth-tracking, .system-action:focus-within, .system-action:hover { animation-play-state: paused; }
+}
+@keyframes blueprint-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -3px; } }
+@media (hover: none), (pointer: coarse) {
+  .depth-surface.visible { transform: none; }
+  .depth-card:hover, .skill-grid .depth-card:hover, .skill-grid .depth-card:hover .skill-icon, .process-step:hover { transform: none; }
+  .project-card.depth-surface:active, .depth-card:active { transform: translateY(-2px); box-shadow: var(--depth-shadow); }
+  .project-card:hover .project-photo img { transform: none; }
+}
+@media (max-width: 900px) { #about .portrait.depth-surface { max-width: min(500px, calc(100% - 24px)); } }
+/* Side captions need to sit within their node on narrower hero layouts. */
+@media (max-width: 1350px) {
+  .system-action .action-signal { position: static; grid-column: 2; width: auto; padding: 0 10px 8px; font-size: 8px; letter-spacing: .06em; }
+  .system-action .action-signal::before { display: none; }
+}
+@media (max-width: 760px) { .process-step::after { display: none; } .depth-drawing { opacity: .055; } }
+/* Also pause existing infinite CSS effects while their section/tab is hidden. */
+html.depth-page-hidden *, html.depth-page-hidden::before, html.depth-page-hidden body::after,
+.hero.depth-offscreen *, .hero.depth-offscreen *::after { animation-play-state: paused !important; }
+@media (prefers-reduced-motion: reduce) {
+  .depth-surface.visible, .depth-card:hover, .depth-card:active, .depth-card:focus-within,
+  .project-card.depth-surface:hover, .depth-layer, .depth-drawing,
+  .system-action .action-step, .system-action .action-step i,
+  #about .portrait.depth-surface img { transform: none !important; }
+  .system-action.depth-surface { animation: none; translate: none; }
+  .project-card:hover .project-photo img { transform: none; }
+  .skill-grid .depth-card:hover .skill-icon { transform: none; }
+  .process-step:hover, .btn-primary:active:not(:disabled) { transform: none; }
+}

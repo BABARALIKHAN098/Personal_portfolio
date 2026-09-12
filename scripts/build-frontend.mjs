@@ -6,7 +6,7 @@ const files=[
   'index.html','robots.txt','sitemap.xml','styles.css','project-images.css','buttons.css',
   'social-icons.css','process.css','design-refinement.css','about.css','journey.css',
   'ai-background.css','chatbot.css','data.js','mental-health-project.js','app.js',
-  'ai-background.js','chatbot.js'
+  'ai-background.js','chatbot.js','depth.css','depth.js','navy-theme.css','project-windows.css','latest-project.js'
 ];
 await rm(dist,{recursive:true,force:true});
 await mkdir(dist,{recursive:true});

@@ -1,0 +1,145 @@
+/* Deep Navy AI theme. Loaded last so layout and motion remain independent. */
+:root {
+  color-scheme: dark;
+  --bg: #07111F;
+  --section-alt: #0B1628;
+  --card: #111E32;
+  --surface: var(--card);
+  --surface-soft: var(--section-alt);
+  --blue: #3B82F6;
+  --blue2: #22D3EE;
+  --ink: #F8FAFC;
+  --ink-soft: #CBD5E1;
+  --muted: #94A3B8;
+  --line: rgba(96, 165, 250, .16);
+  --link: #93C5FD;
+  --ring: rgba(34, 211, 238, .18);
+  --shadow: 0 18px 48px rgba(2, 8, 18, .35);
+  --depth-shadow: inset 0 1px 0 rgba(96, 165, 250, .06), 0 5px 12px rgba(2, 8, 18, .2), 0 20px 44px rgba(2, 8, 18, .32);
+}
+html, body { background: var(--bg); color: var(--ink); }
+::selection { background: var(--blue); color: var(--bg); }
+body::before { background-color: var(--bg); background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); opacity: .35; }
+body::after { background: radial-gradient(ellipse at 9% 12%, rgba(59, 130, 246, .1), transparent 32%), radial-gradient(ellipse at 88% 36%, rgba(34, 211, 238, .04), transparent 30%), radial-gradient(ellipse at 18% 78%, rgba(59, 130, 246, .06), transparent 30%); }
+.ambient { opacity: .07; }
+.ambient-one { background: var(--blue); }
+.ambient-two { background: var(--blue2); }
+main > .section { background: var(--bg); }
+main > .section:nth-of-type(even) { background: var(--section-alt); }
+main > .hero, main > #about { background: rgba(7, 17, 31, .78) !important; }
+main > .work-section { background: var(--section-alt) !important; }
+.blueprint::before { background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); opacity: .4; }
+.hero::after { border-color: var(--line); box-shadow: 0 0 0 70px rgba(59, 130, 246, .018), 0 0 0 140px rgba(34, 211, 238, .012); }
+.contact-section::before { background: rgba(59, 130, 246, .06); }
+.depth-drawing { color: var(--blue2); opacity: .09; }
+em, .kicker, .eyebrow, .text-link span, .arrow { color: var(--link); }
+.hero-title em { color: var(--blue); }
+.hero-title em::after { background: linear-gradient(90deg, var(--blue), var(--blue2)); }
+.hero-meta, .hero-meta > div { border-color: var(--line); }
+
+/* Navigation and controls use solid, readable surfaces. */
+.nav { background: rgba(11, 22, 40, .96); border-color: var(--line); box-shadow: var(--shadow); }
+.nav-links > a { color: var(--muted); }
+.nav-links > a:hover, .nav-links > a.active { color: var(--ink); background: rgba(59, 130, 246, .12); }
+.nav-links > a:not(.btn)::after { background: var(--blue2); }
+.brand > span, .footer-grid .brand span { color: var(--bg); background: var(--blue); box-shadow: 0 5px 18px rgba(59, 130, 246, .15); }
+.menu-toggle i { background: var(--ink); }
+.menu-toggle:hover { background: var(--card); }
+.btn { color: var(--ink); background: var(--card); border-color: var(--line); box-shadow: inset 0 1px 0 rgba(96, 165, 250, .08), 0 4px 12px rgba(2, 8, 18, .2); }
+.btn::before { background: linear-gradient(110deg, transparent 20%, rgba(147, 197, 253, .1) 48%, transparent 76%); }
+.btn-primary, .btn-small, .nav-links > .btn-small { background: var(--blue); color: var(--bg); border-color: var(--blue); box-shadow: 0 6px 20px rgba(59, 130, 246, .17); }
+.btn-primary:hover:not(:disabled), .btn-small:hover:not(:disabled), .nav-links > .btn-small:hover { background: #60A5FA; color: var(--bg); border-color: #60A5FA; box-shadow: 0 10px 28px rgba(59, 130, 246, .22); }
+.btn-secondary:hover:not(:disabled), .btn-quiet:hover:not(:disabled) { color: var(--ink); background: #172B45; border-color: rgba(96, 165, 250, .45); }
+.btn-primary:active:not(:disabled) { box-shadow: inset 0 2px 3px rgba(7, 17, 31, .2), 0 1px 4px rgba(59, 130, 246, .15); }
+.unavailable, .btn-disabled, .btn:disabled { color: var(--muted); opacity: 1; background: var(--section-alt); box-shadow: none; }
+.filters button { background: var(--card); border-color: var(--line); color: var(--muted); }
+.filters button:hover { background: #172B45; color: var(--ink); border-color: rgba(96, 165, 250, .4); }
+.filters button.active, .filters button.active:hover { color: var(--bg); background: var(--blue); border-color: var(--blue); box-shadow: 0 5px 16px rgba(59, 130, 246, .15); }
+.skip-link { color: var(--bg); background: var(--blue2); }
+
+/* Layered workflow: restrained blue lighting, cyan node details. */
+.system-action.depth-surface { background: radial-gradient(ellipse at var(--light-x) var(--light-y), #172D49, var(--card) 72%); border-color: rgba(96, 165, 250, .28); box-shadow: inset 0 1px 0 rgba(147, 197, 253, .1), 0 5px 0 -2px #102039, 0 9px 0 -4px #152B47, 0 24px 60px rgba(2, 8, 18, .4), 0 0 45px rgba(59, 130, 246, .055); }
+.system-head, .system-stats { color: var(--muted); border-color: var(--line); }
+.live-dot { color: #6EE7B7; }
+.system-action .action-step { color: var(--ink); background: linear-gradient(130deg, #172B45, var(--card)); border-color: rgba(96, 165, 250, .3); box-shadow: inset 0 1px 0 rgba(147, 197, 253, .07), 0 3px 0 -1px #0B1628, 0 9px 20px rgba(2, 8, 18, .25); }
+.system-action .action-step:nth-child(3) { border-color: rgba(34, 211, 238, .4); }
+.system-action .action-step i { color: var(--blue2); background: #112C42; box-shadow: inset 0 1px 0 rgba(34, 211, 238, .12), 0 4px 12px rgba(2, 8, 18, .2); }
+.action-step:not(:last-child)::after { background: rgba(96, 165, 250, .4); }
+.action-signal { color: var(--link); }
+.action-signal::before { border-color: rgba(96, 165, 250, .4); }
+.process-flow { background: var(--card); border-color: var(--line); box-shadow: var(--depth-shadow); }
+.process-flow::before { background: linear-gradient(90deg, #24405F, var(--blue), #16788D); }
+.process-step, .process-copy b { color: var(--ink-soft); }
+.process-copy small { color: var(--muted); }
+.process-flow .process-icon { color: var(--link); background: #172D49; border-color: var(--card); box-shadow: 0 0 0 1px var(--line), 0 3px 0 #0B1628, 0 7px 14px rgba(2, 8, 18, .3); }
+.process-step:last-child { background: #16375B; border: 1px solid rgba(96, 165, 250, .32); color: var(--ink); box-shadow: 0 4px 0 -1px #0B1628, 0 12px 24px rgba(2, 8, 18, .3); }
+.process-step:last-child .process-icon { color: var(--blue2); background: #122B44; box-shadow: 0 0 0 1px rgba(34, 211, 238, .22), 0 5px 14px rgba(2, 8, 18, .25); }
+.process-step:last-child small { color: #B7CBDE; }
+
+/* Images and certificates stay true to their source; navy frames integrate them. */
+.project-card, .skill-grid article, .timeline-card, .cert-card, .demo-grid article, .contact-form, .suggestion { background: var(--card); border-color: var(--line); box-shadow: var(--depth-shadow); }
+.project-card.depth-surface::after { background: radial-gradient(260px circle at var(--light-x) var(--light-y), rgba(34, 211, 238, .035), transparent 75%); }
+.project-art, .gallery-video-open { background: var(--section-alt); }
+.project-photo > span { color: var(--ink); background: rgba(7, 17, 31, .93); border: 1px solid rgba(96, 165, 250, .25); }
+.project-photo img, .gallery-video-open img { border-bottom: 1px solid var(--line); }
+.problem { background: var(--section-alt); border-left-color: var(--blue); }
+.result { color: var(--muted) !important; }
+.status, .about-facts dt, .contact-list span { color: var(--muted); }
+.tags span, .skill-tags .tech-badge, .journey-meta span { color: var(--ink-soft); background: var(--section-alt); border-color: var(--line); }
+.skill-icon { color: var(--blue2) !important; background: #142E45; border-color: rgba(34, 211, 238, .2); }
+.skill-grid article:hover .skill-icon { color: var(--blue2) !important; background: #163C52; }
+.depth-card .skill-icon, .depth-card .cert-mark, .depth-card .journey-meta span { box-shadow: inset 0 1px 0 rgba(96, 165, 250, .08), 0 2px 0 #0B1628, 0 6px 12px rgba(2, 8, 18, .22); }
+.demo-grid span, .cert-card span, .journey-card .status { color: var(--link); }
+.gallery-video-open i { color: var(--ink); background: rgba(17, 30, 50, .94); border: 1px solid rgba(96, 165, 250, .35); }
+.journey-card > p { color: var(--ink-soft); }
+.journey-card > small { color: var(--muted); }
+.journey-card::after { border-color: var(--line); box-shadow: 0 0 0 22px rgba(59, 130, 246, .025); }
+.journey-meta, #about .about-facts, #about .about-facts > div + div { border-color: var(--line); }
+.notice { color: var(--muted); background: var(--card); border-color: var(--line); border-left-color: var(--blue); }
+.cert-mark { background: #142E45; color: var(--blue2); }
+.cert-card::before { border-color: var(--line); background-color: var(--section-alt); box-shadow: 0 6px 18px rgba(2, 8, 18, .24); }
+#about .portrait.depth-surface img { border-color: rgba(96, 165, 250, .3); box-shadow: 0 20px 50px rgba(2, 8, 18, .35), 0 0 35px rgba(59, 130, 246, .045); }
+#about .portrait.depth-surface::before { background: rgba(17, 30, 50, .6); border-color: rgba(96, 165, 250, .26); }
+#about .portrait.depth-surface::after { border-color: rgba(34, 211, 238, .16); }
+#about .about-project-link, #about .about-social-link { color: var(--link); text-decoration-color: rgba(147, 197, 253, .45); }
+#about .about-project-link:hover, #about .about-social-link:hover { color: var(--blue2); }
+
+/* Forms, native dialogs, and status feedback. */
+.contact-list > a, .contact-list > div { border-color: var(--line); }
+.contact-list > a:hover { color: var(--link); background: rgba(59, 130, 246, .07); }
+input, textarea { color: var(--ink); background: var(--section-alt); border-color: rgba(96, 165, 250, .3); caret-color: var(--blue2); }
+input::placeholder, textarea::placeholder { color: var(--muted); opacity: 1; }
+input:focus, textarea:focus { border-color: var(--blue2); outline-color: var(--ring); }
+input:autofill { box-shadow: inset 0 0 0 100px var(--section-alt); -webkit-text-fill-color: var(--ink); }
+.contact-form small, .footer-grid p, .footer-grid h3, .footer-bottom { color: var(--muted); }
+.form-status.error { color: #FCA5A5; }
+.form-status.success { color: #6EE7B7; }
+dialog, .video-dialog { color: var(--ink); background: var(--card); border: 1px solid rgba(96, 165, 250, .25); box-shadow: 0 30px 90px rgba(2, 8, 18, .6); }
+dialog::backdrop { background: rgba(7, 17, 31, .82); }
+.case-grid section { background: var(--section-alt); border-color: var(--line); }
+.dialog-close, .video-close, .back-top { color: var(--ink); background: #172B45; border-color: var(--line); }
+.toast { color: var(--ink); background: #172B45; border: 1px solid rgba(96, 165, 250, .3); }
+footer { color: var(--ink); background: var(--bg); border-top: 1px solid var(--line); }
+.footer-bottom { border-color: var(--line); }
+.footer-grid > div > a:not(.brand) { color: var(--ink-soft); }
+
+/* Chat is part of the same interface, including error and loading states. */
+.chat-launcher, .chat-avatar, .chat-send { color: var(--bg); background: var(--blue); box-shadow: 0 8px 26px rgba(59, 130, 246, .19); }
+.chat-launcher:hover { box-shadow: 0 10px 30px rgba(59, 130, 246, .25); }
+.chat-panel { color: var(--ink); background: var(--card); border-color: rgba(96, 165, 250, .3); box-shadow: 0 24px 70px rgba(2, 8, 18, .6); }
+.chat-head, .chat-form { background: var(--card); border-color: var(--line); }
+.chat-head-copy small, .chat-note { color: var(--muted); }
+.chat-icon-button { color: var(--muted); }
+.chat-icon-button:hover { color: var(--ink); background: #172B45; }
+.chat-feed { background: var(--section-alt); }
+.chat-bubble { color: var(--ink-soft); background: var(--card); border-color: var(--line); }
+.chat-message.user .chat-bubble { color: var(--ink); background: #1A3B63; border-color: rgba(96, 165, 250, .3); }
+.chat-message.error .chat-bubble { color: #FCA5A5; background: #2A2030; border-color: rgba(252, 165, 165, .25); }
+.chat-sources a, .chat-suggestions button { color: var(--link); background: var(--card); border-color: rgba(96, 165, 250, .25); }
+.chat-suggestions button:hover { color: var(--ink); background: #172B45; border-color: var(--blue); }
+.chat-typing i { background: var(--blue2); }
+@media (hover: hover) and (pointer: fine) {
+  .project-card.depth-surface:hover, .depth-card:hover, .depth-card:focus-within, .skill-grid article:hover { border-color: rgba(96, 165, 250, .4); box-shadow: var(--depth-shadow), 0 0 28px rgba(59, 130, 246, .07), 0 0 12px rgba(34, 211, 238, .025); }
+}
+@media (max-width: 900px) { .nav-links { background: var(--card); border-color: var(--line); } }
+@media (max-width: 760px) { .process-step { background: var(--section-alt); border-color: var(--line); } }

@@ -8,7 +8,8 @@
 - **Document purpose:** Primary retrieval source for a RAG-powered portfolio chatbot.
 - **Date generated:** 2026-08-28
 - **Portfolio version:** No Git commit is available because the analyzed root is not a Git checkout.
-- **Total projects analyzed:** 6
+- **Total projects analyzed:** 7
+- **Latest project update:** Content Trend Classification, verified from GitHub on 2026-09-12. Earlier entries retain their original verification dates.
 - **Source root:** `E:/Portfolio_maker/porfilio`
 - **Last verified date:** 2026-08-28
 - **Evidence boundary:** This root contains the portfolio website, curated project summaries, screenshots, videos, certificates, and resume assets. The six linked project repositories are not nested inside this root. Project details below therefore distinguish portfolio assertions from implementation that could be independently inspected locally.
@@ -152,6 +153,7 @@ Source: `index.html`, lines 119–123.
 
 | Project ID | Project name | Category | Purpose | Main technologies | Status | GitHub URL | Live demo |
 |---|---|---|---|---|---|---|---|
+| `content-optimization` | Content Trend Classification | Machine learning / content analytics | Support human content-refresh prioritization. | Python, scikit-learn, FastAPI, Pandas, JavaScript | Research application; not production-ready | https://github.com/BABARALIKHAN098/Machine-learning-project-content-optimization | None verified |
 | `delivery-guard` | DeliveryGuard AI | Machine learning / supply chain | Predict late-delivery risk before shipment. | Python, scikit-learn, FastAPI, React, TypeScript | End-to-end application | https://github.com/BABARALIKHAN098/data_delivery-machine-learning-project | None verified |
 | `resume-screening` | AI-Powered Resume Screening System | NLP / recruitment support | Parse and rank resumes against job keywords. | Python, Flask, SQLite, PyPDF2, Pandas | Working web application | https://github.com/BABARALIKHAN098/Resume-screening-system | None verified |
 | `fake-news` | Fake News Detection System | NLP / machine learning | Classify supplied news text as real or fake. | Python, scikit-learn, TF-IDF, Flask, Docker | End-to-end ML application | https://github.com/BABARALIKHAN098/Fake-news-Detector | None verified |
@@ -1011,6 +1013,34 @@ Add a dataset card, external validation, uncertainty and explainability, consent
 - `index.html`, lines 86–90 and 108–110
 - `assets/projects/mindsight.png`
 - `assets/videos/mental-health-score-predictor.mp4`
+
+### Project: `Content Trend Classification`
+
+#### Project Metadata
+
+- **Project ID:** `content-optimization`
+- **Repository URL:** https://github.com/BABARALIKHAN098/Machine-learning-project-content-optimization
+- **Verified revision:** `ed1508d6e69fc29484433e8abd95bbe9ac9d6f52`
+- **Verified date:** 2026-09-12
+- **Status:** Research application; not production-ready.
+- **Repository created:** 2026-09-03; most recent push at verification: 2026-09-11.
+
+#### Overview and Technology
+
+A leakage-aware machine-learning workflow predicts content trend direction to support human refresh prioritization. The documented source has 30,000 rows and 44 columns. Complete client groups are split into separate partitions, with preprocessing fitted on training data only. Logistic regression and random forest models are compared and packaged as frozen research artifacts.
+
+The FastAPI research API serves a vanilla HTML/CSS/JavaScript workspace for single-content and strict JSON-batch predictions. It supports optional uncalibrated scores, searchable and paginated results, and full-response JSON downloads. Python, scikit-learn, Pandas, FastAPI, JavaScript, and Pytest are documented. Tokens and prediction data are not stored in browser storage. No public live-demo URL is documented.
+
+#### Results and Limitations
+
+SPEC-07 records validation macro F1 of 0.430224 and down-class recall of 0.861367 for random forest; logistic regression macro F1 is 0.389920. Both miss the unchanged 0.45 macro-F1 target. Neither finalist is recommended for production. Validation was reused and historical test scoring already exists; this replay is not independent generalization evidence. Metadata cutoff and final-test policy remain unresolved. Scores are non-causal and must not trigger automatic content changes.
+
+#### Sources
+
+- `latest-project.js` and `assets/projects/content-optimization.png` in this portfolio.
+- https://github.com/BABARALIKHAN098/Machine-learning-project-content-optimization/blob/ed1508d6e69fc29484433e8abd95bbe9ac9d6f52/readme.md
+- https://github.com/BABARALIKHAN098/Machine-learning-project-content-optimization/blob/ed1508d6e69fc29484433e8abd95bbe9ac9d6f52/reports/evaluation/spec07-reference/evaluation_report.md
+- https://github.com/BABARALIKHAN098/Machine-learning-project-content-optimization/blob/ed1508d6e69fc29484433e8abd95bbe9ac9d6f52/reports/evaluation/spec07-reference/decision.json
 
 ## Cross-Project Comparisons
 
