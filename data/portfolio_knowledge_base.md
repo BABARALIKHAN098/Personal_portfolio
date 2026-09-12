@@ -1024,6 +1024,7 @@ Add a dataset card, external validation, uncertainty and explainability, consent
 - **Verified date:** 2026-09-12
 - **Status:** Research application; not production-ready.
 - **Repository created:** 2026-09-03; most recent push at verification: 2026-09-11.
+- **Demo video:** `assets/videos/content-trend-classification.mp4`, supplied by the portfolio owner on 2026-09-12. Available in the project case study and project-demo gallery; this is a recorded demonstration, not a live hosted application.
 
 #### Overview and Technology
 

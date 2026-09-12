@@ -41,11 +41,28 @@ const SKILL_ICONS=[
 function skillIcon(i,title){return `<span class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24">${SKILL_ICONS[i]||SKILL_ICONS[0]}</svg></span><span class="sr-only">${title}</span>`}
 const TECH_MARKS={'Python':'Py','SQL':'DB','JavaScript':'JS','TypeScript':'TS','Scikit-learn':'SK','Pandas':'Pd','NumPy':'Np','Feature Engineering':'ƒx','TensorFlow':'TF','Keras':'K','CNNs':'◉','TF-IDF':'Tf','Text Classification':'T','Document Parsing':'▤','Image Classification':'◐','Pillow':'P','FastAPI':'⚡','Flask':'F','REST APIs':'↔','Pydantic':'P²','React':'⚛','Vite':'V','Tailwind CSS':'TW','Streamlit':'S','SQLite':'SQ','Plotly':'▥','Jupyter':'J','Docker':'◇','Pytest':'✓','Model Serving':'▶','GitHub':'GH'};
 function techBadge(name){const mark=TECH_MARKS[name]||name.slice(0,2);const slug=name.toLowerCase().replace(/[^a-z0-9]+/g,'-');return `<span class="tech-badge tech-${slug}"><i aria-hidden="true">${mark}</i>${name}</span>`}
-function renderSkills(){$('#skill-grid').innerHTML=SKILL_GROUPS.map(([title,items],i)=>`<article>${skillIcon(i,title)}<h3>${title}</h3><div class="tags skill-tags">${items.map(techBadge).join('')}</div></article>`).join('')}
+function renderSkills(){window.renderCapabilities($('#skill-grid'),SKILL_GROUPS)}
 function bindProjectActions(){$$('.case-open').forEach(b=>b.addEventListener('click',()=>openCase(b.dataset.id)));$$('.unavailable').forEach(b=>b.addEventListener('click',()=>toast(`${b.dataset.label} link will appear after the verified URL is added.`)))}
 function openCase(id){const p=PORTFOLIO_PROJECTS.find(x=>x.id===id),d=p.details||{};$('#case-content').innerHTML=`<p class="kicker">CASE STUDY / ${p.categoryLabel}</p><h2 id="case-title">${p.title}</h2><p class="status">${p.status}</p><p class="dialog-lead">${p.solution}</p><div class="case-grid"><section><h3>Real-world problem</h3><p>${p.problem}</p></section><section><h3>Target users</h3><p>${d.users||'Not documented.'}</p></section><section><h3>Data / information source</h3><p>${d.data||'Not documented.'}</p></section><section><h3>Solution architecture</h3><p>${d.architecture||'Not documented.'}</p></section><section><h3>Approach & preprocessing</h3><p>${d.approach||'Not documented.'}</p></section><section><h3>Evaluation methodology</h3><p>${d.evaluation||'Not documented.'}</p></section><section><h3>Verified results</h3><p>${p.result}</p></section><section><h3>Engineering decisions</h3><p>${d.decisions||'Not documented.'}</p></section><section><h3>Limitations & improvements</h3><p>${d.limitations||'Not documented.'}</p></section></div><div class="tags">${p.tech.map(t=>`<span>${t}</span>`).join('')}</div><div class="case-links">${linkButton('GitHub',p.links.github)}${linkButton('Live demo',p.links.demo)}${linkButton('Demo video',p.links.video)}</div>`;$('#case-dialog').showModal();$$('.unavailable',$('#case-content')).forEach(b=>b.addEventListener('click',()=>toast(`${b.dataset.label} link will appear after the verified URL is added.`)));$('.video-open',$('#case-content'))?.addEventListener('click',()=>openVideo(p.links.video,p.title))}
 
-function openVideo(src,title){const dialog=$('#video-dialog'),video=$('#modal-video');$('#video-title').textContent=title;video.src=src;$('#case-dialog').close();dialog.showModal();video.play().catch(()=>toast('Press play to start the demo.'))}
+let videoAudioContext,videoAudioGain;
+function boostVideoAudio(){
+  const AudioContext=window.AudioContext||window.webkitAudioContext;
+  if(!AudioContext)return;
+  try{
+    if(!videoAudioContext){
+      videoAudioContext=new AudioContext();
+      const source=videoAudioContext.createMediaElementSource($('#modal-video'));
+      videoAudioGain=videoAudioContext.createGain();
+      const limiter=videoAudioContext.createDynamicsCompressor();
+      limiter.threshold.value=-6;limiter.knee.value=6;limiter.ratio.value=20;limiter.attack.value=0.003;limiter.release.value=0.15;
+      source.connect(videoAudioGain);videoAudioGain.connect(limiter);limiter.connect(videoAudioContext.destination);
+    }
+    videoAudioGain.gain.value=Number($('#video-boost').value);
+    videoAudioContext.resume().catch(()=>toast('Press play to resume audio.'));
+  }catch{toast('Audio boost is unavailable in this browser. Use the video volume control.');}
+}
+function openVideo(src,title){const dialog=$('#video-dialog'),video=$('#modal-video');$('#video-title').textContent=title;video.src=src;video.volume=1;video.muted=false;video.defaultPlaybackRate=Number($('#video-speed').value);video.playbackRate=video.defaultPlaybackRate;boostVideoAudio();$('#case-dialog').close();dialog.showModal();video.play().catch(()=>toast('Press play to start the demo.'))}
 function closeVideo(){const dialog=$('#video-dialog'),video=$('#modal-video');video.pause();video.removeAttribute('src');video.load();dialog.close()}
 function toast(msg){const el=$('.toast');el.textContent=msg;el.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>el.classList.remove('show'),3400)}
 function observeReveals(){if(matchMedia('(prefers-reduced-motion: reduce)').matches){$$('.reveal').forEach(x=>x.classList.add('visible'));return} const o=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');o.unobserve(e.target)}}),{threshold:.12});$$('.reveal:not(.visible)').forEach(x=>o.observe(x))}
@@ -60,6 +77,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   $('.dialog-close').addEventListener('click',()=>$('#case-dialog').close());$('#case-dialog').addEventListener('click',e=>{if(e.target===$('#case-dialog'))e.target.close()});
   $('.video-close').addEventListener('click',closeVideo);$('#video-dialog').addEventListener('click',e=>{if(e.target===$('#video-dialog'))closeVideo()});$('#video-dialog').addEventListener('close',()=>{const video=$('#modal-video');video.pause();video.removeAttribute('src');video.load()});
   $$('.gallery-video-open').forEach(button=>button.addEventListener('click',()=>openVideo(button.dataset.video,button.dataset.title)));
+  $('#video-boost').addEventListener('change',boostVideoAudio);
+  $('#video-speed').addEventListener('change',e=>{const video=$('#modal-video');video.defaultPlaybackRate=Number(e.target.value);video.playbackRate=Number(e.target.value)});
   $('.back-top').addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
   $('#contact-form').addEventListener('submit',e=>{e.preventDefault();const f=e.currentTarget,s=$('.form-status',f);if(!f.checkValidity()){f.reportValidity();s.textContent='Please complete all fields with a valid email.';s.className='form-status error';return}const d=new FormData(f);s.textContent='Opening your email app…';s.className='form-status success';location.href=`mailto:babaralikhanaiexpert098@gmail.com?subject=${encodeURIComponent(d.get('subject'))}&body=${encodeURIComponent(`From: ${d.get('name')} (${d.get('email')})\n\n${d.get('message')}`)}`});
   $('#suggestion-form').addEventListener('submit',e=>{e.preventDefault();const f=e.currentTarget,s=$('.form-status',f);if(!f.checkValidity()){f.reportValidity();return}s.textContent='Thank you — your feedback is appreciated. Connect a form endpoint to store submissions.';s.className='form-status success';f.reset()});

@@ -20,5 +20,8 @@ PORTFOLIO_PROJECTS.unshift({
     decisions: 'Explicit no-promotion decisions, hash-checked model packages, schema-driven requests, and opt-in model scores keep research evidence separate from production claims. Tokens, inputs, and predictions are not written to browser storage.',
     limitations: 'Both models miss the 0.45 macro-F1 target. Metadata cutoff evidence and final-test policy remain unresolved. Scores are uncalibrated and non-causal; production runtime readiness is unverified. No public live demo is documented.'
   },
-  links: {github: 'https://github.com/BABARALIKHAN098/Machine-learning-project-content-optimization'}
+  links: {
+    github: 'https://github.com/BABARALIKHAN098/Machine-learning-project-content-optimization',
+    video: 'assets/videos/content-trend-classification.mp4'
+  }
 });

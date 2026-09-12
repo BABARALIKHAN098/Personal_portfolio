@@ -27,10 +27,12 @@
   <link rel="stylesheet" href="depth.css">
   <link rel="stylesheet" href="navy-theme.css">
   <link rel="stylesheet" href="project-windows.css">
+  <link rel="stylesheet" href="capabilities.css">
+  <script src="capabilities.js" defer></script>
   <script src="data.js" defer></script>
   <script src="mental-health-project.js" defer></script>
-  <script src="latest-project.js" defer></script>
-  <script src="app.js?v=20260912" defer></script>
+  <script src="latest-project.js?v=20260912-video" defer></script>
+  <script src="app.js?v=20260912-audio" defer></script>
   <script src="ai-background.js" defer></script>
   <script src="chatbot-runtime-config.js" defer></script>
   <script src="chatbot.js?v=4" defer></script>
@@ -93,6 +95,7 @@
         <div class="project-grid" id="project-grid"></div>
         <div class="demo-heading reveal"><p class="kicker">PROJECT DEMOS</p><h3>See the systems in action.</h3></div>
         <div class="demo-grid reveal">
+          <article><button class="gallery-video-open" data-video="assets/videos/content-trend-classification.mp4" data-title="Content Trend Classification" aria-label="Play Content Trend Classification demo"><img src="assets/projects/content-optimization.png" alt="Content Trend Classification research workspace preview"><i aria-hidden="true">▶</i></button><div><span>Machine Learning &amp; Content Analytics</span><h3>Content Trend Classification</h3></div></article>
           <article><button class="gallery-video-open" data-video="assets/videos/deliveryguard-ai.mp4" data-title="DeliveryGuard AI" aria-label="Play DeliveryGuard AI demo"><img src="assets/projects/delivery-guard.png" alt="DeliveryGuard AI application preview"><i>▶</i></button><div><span>Machine Learning</span><h3>DeliveryGuard AI</h3></div></article>
           <article><button class="gallery-video-open" data-video="assets/videos/mental-health-score-predictor.mp4" data-title="Mindsignal — Mental Health Score Predictor" aria-label="Play Mental Health Score Predictor demo"><img src="assets/projects/mindsight.png" alt="Mindsignal Mental Health Score Predictor application preview"><i>▶</i></button><div><span>Responsible Machine Learning</span><h3>Mindsignal — Mental Health Score Predictor</h3></div></article>
         </div>
@@ -101,8 +104,8 @@
 
     <section class="section expertise blueprint" id="expertise">
       <div class="container">
-        <div class="section-heading reveal"><div><p class="kicker">02 / CAPABILITIES</p><h2>Core <em>capabilities.</em></h2></div><p>A practical blend of AI engineering, data science, research, technical execution, and collaborative leadership.</p></div>
-        <div class="skill-grid reveal" id="skill-grid"></div>
+        <div class="section-heading reveal"><div><p class="kicker">02 / CAPABILITIES</p><h2>Core <em>capabilities.</em></h2></div><p>A focused technology stack for building, grounding and deploying reliable AI systems. Hover over any capability to bring it forward.</p></div>
+        <div class="capability-stage reveal" id="skill-grid" aria-label="Technology capabilities"></div>
       </div>
     </section>
 
@@ -142,6 +145,8 @@
           <article class="cert-card reveal"><div class="cert-mark">05</div><div><span>ANTHROPIC EDUCATION</span><h3>Claude Code 101</h3><p>Anthropic · July 2026</p><small>Credential ID: esswibmj8hgb</small></div><a class="btn btn-secondary" href="certificate-esswibmj8hgb-1783582741.pdf" target="_blank" rel="noopener" aria-label="View Claude Code 101 certificate">View credential</a></article>
           <article class="cert-card reveal"><div class="cert-mark">06</div><div><span>UDEMY</span><h3>100 Days of Code: The Complete Python Pro Bootcamp</h3><p>Dr. Angela Yu · May 2026 · 57 hours</p><small>Credential ID: UC-4a78cde5-3182-4376-8b74-2ce8c0788360</small></div><a class="btn btn-secondary" href="UC-4a78cde5-3182-4376-8b74-2ce8c0788360.pdf" target="_blank" rel="noopener" aria-label="View 100 Days of Code Python certificate">View credential</a></article>
           <article class="cert-card reveal"><div class="cert-mark">07</div><div><span>UDEMY</span><h3>Complete Generative AI Course With LangChain and Hugging Face</h3><p>Krish Naik · August 2025 · 54 hours</p><small>Credential ID: UC-1e02588e-f4af-4f8c-a872-f95f01df4057</small></div><a class="btn btn-secondary" href="UC-1e02588e-f4af-4f8c-a872-f95f01df4057.pdf" target="_blank" rel="noopener" aria-label="View Generative AI with LangChain and Hugging Face certificate">View credential</a></article>
+          <article class="cert-card reveal"><div class="cert-mark">08</div><div><span>FLYRANK AI INTERNSHIP</span><h3>Machine Learning — Certificate of Completion</h3><p>FlyRank · September 7, 2026</p><small>Credential ID: FR-D11-63401-C871C</small></div><a class="btn btn-secondary" href="https://internship.flyrank.ai/verify/FR-D11-63401-C871C?first_name=Babar" target="_blank" rel="noopener noreferrer" aria-label="Verify FlyRank Machine Learning certificate">View credential</a></article>
+          <article class="cert-card reveal"><div class="cert-mark">09</div><div><span>FLYRANK AI INTERNSHIP</span><h3>AI Fluency — Certificate of Completion</h3><p>FlyRank · September 7, 2026</p><small>Credential ID: FR-D11-2A6C6-42BFD</small></div><a class="btn btn-secondary" href="https://internship.flyrank.ai/verify/FR-D11-2A6C6-42BFD?first_name=Babar" target="_blank" rel="noopener noreferrer" aria-label="Verify FlyRank AI Fluency certificate">View credential</a></article>
         </div>
       </div>
     </section>
@@ -162,6 +167,10 @@
     <button class="video-close" aria-label="Close video">×</button>
     <div class="video-modal-head"><p class="kicker">PROJECT DEMO</p><h2 id="video-title">Project demo</h2></div>
     <video id="modal-video" controls playsinline preload="metadata"></video>
+    <div class="video-playback-settings">
+      <label for="video-boost">Audio boost <select id="video-boost"><option value="1">Off</option><option value="2" selected>2×</option><option value="3">3×</option><option value="4">4×</option></select></label>
+      <label for="video-speed">Speed <select id="video-speed"><option value="1" selected>Normal</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option></select></label>
+    </div>
   </dialog>
   <div class="toast" role="status" aria-live="polite"></div>
 </body>
