@@ -37,7 +37,7 @@ python -m pip install -r requirements-dev.txt
 Copy-Item .env.example .env
 ```
 
-Add `GROQ_API_KEY` and `PINECONE_API_KEY` to the untracked `.env` file. Confirm that `GROQ_MODEL` is available in the configured Groq account; model availability can change. Never place actual secret values in `.env.example` or frontend code.
+Add `GROQ_API_KEY`, `PINECONE_API_KEY`, and `HF_TOKEN` (with Inference Providers permission) to the untracked `.env` file. All three are required; a missing token causes chat requests to return HTTP 503. Restart the backend after changing credentials. Confirm that `GROQ_MODEL` is available in the configured Groq account; model availability can change. Never place actual secret values in `.env.example` or frontend code.
 
 ### Knowledge ingestion
 
@@ -73,7 +73,7 @@ The widget reads the backend URL from the `data-chat-api` attribute on `<body>` 
 
 ### API
 
-- `GET /api/health` reports safe readiness booleans without exposing credentials.
+- `GET /api/health` reports credential-presence booleans for Groq, Pinecone, and Hugging Face without exposing credentials. These checks do not verify provider connectivity or token validity.
 - `POST /api/chat` accepts a message, anonymous session ID, and up to six recent user/assistant history messages.
 - No public ingestion endpoint exists.
 

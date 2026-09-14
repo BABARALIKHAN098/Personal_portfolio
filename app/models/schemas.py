@@ -79,4 +79,5 @@ class HealthResponse(BaseModel):
     status: Literal["ok", "degraded"]
     groq_configured: bool
     pinecone_configured: bool
+    huggingface_configured: bool
     embedding_model_loaded: bool

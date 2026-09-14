@@ -16,5 +16,6 @@ def health(request: Request) -> HealthResponse:
         status="ok" if ready else "degraded",
         groq_configured=bool(settings.groq_api_key),
         pinecone_configured=bool(settings.pinecone_api_key),
+        huggingface_configured=bool(settings.hf_token),
         embedding_model_loaded=embeddings.loaded,
     )
