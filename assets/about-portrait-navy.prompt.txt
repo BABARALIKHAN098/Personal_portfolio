@@ -1,0 +1,5 @@
+Editor: built-in image_gen
+Source: new_image_for_about.png
+Output: assets/about-portrait-navy.png
+
+Use case: identity-preserve. Asset type: About-section portrait for a deep navy portfolio website. Input image: edit target. Replace only the gray studio background with a clean deep navy background, base color #07111F, with a very subtle soft gradient toward #0B1628 behind the subject, edges #07111F. Preserve the exact same person, face, facial features, skin tone, hair, beard, expression, white T-shirt, crossed arms, pose and photographic detail. Do not beautify or redraw the person. Keep original portrait composition and aspect ratio. Natural clean hair edges, no pale halo. No added objects, text, watermark, or neon effects.

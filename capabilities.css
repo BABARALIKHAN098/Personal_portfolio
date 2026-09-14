@@ -1,8 +1,8 @@
 #expertise { background:var(--bg); color:var(--ink); }
 #expertise .kicker, #expertise h2 em { color:var(--link); }
 #expertise .section-heading > p { color:var(--muted); }
-#expertise .capability-stage { position:relative; isolation:isolate; overflow:hidden; border:1px solid var(--line); border-radius:32px; padding:18px 24px 0; perspective:1200px; background:radial-gradient(ellipse at 50% 40%,rgba(59,130,246,.08),transparent 65%),linear-gradient(130deg,var(--card),var(--section-alt)); box-shadow:var(--depth-shadow); }
-#expertise .capability-stage::before { content:''; position:absolute; inset:0; z-index:-1; pointer-events:none; background-image:linear-gradient(rgba(96,165,250,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(96,165,250,.045) 1px,transparent 1px); background-size:28px 28px; }
+#expertise .capability-stage { position:relative; isolation:isolate; overflow:hidden; border:1px solid var(--line); border-radius:32px; padding:18px 24px 0; perspective:1200px; background:radial-gradient(ellipse at 50% 40%,color-mix(in srgb, var(--blue) 8%, transparent),transparent 65%),linear-gradient(130deg,var(--card),var(--section-alt)); box-shadow:var(--depth-shadow); }
+#expertise .capability-stage::before { content:''; position:absolute; inset:0; z-index:-1; pointer-events:none; background-image:linear-gradient(color-mix(in srgb, var(--blue) 4.5%, transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb, var(--blue) 4.5%, transparent) 1px,transparent 1px); background-size:28px 28px; }
 #expertise .capability-layers { transform:rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg)); transform-style:preserve-3d; transition:transform 280ms ease-out; }
 #expertise .capability-row { position:relative; min-width:0; padding:12px 0 2px; transform:translateZ(3px); }
 #expertise .capability-row + .capability-row { border-top:1px solid var(--line); }
@@ -14,14 +14,14 @@
 #expertise .capability-row:nth-child(2) .capability-track { animation-duration:30s; animation-direction:reverse; }
 #expertise .capability-row:nth-child(3) .capability-track { animation-duration:34s; }
 #expertise .capability-group { display:flex; flex:none; gap:14px; padding:0 14px 0 0; margin:0; list-style:none; transform-style:preserve-3d; }
-#expertise .capability-card { position:relative; display:flex; align-items:center; flex:0 0 222px; width:222px; min-height:80px; gap:12px; padding:15px; border:1px solid var(--line); border-radius:16px; background:var(--card); box-shadow:0 4px 12px rgba(2,8,18,.2); transform:translate3d(0,0,0); transition:transform 280ms ease,box-shadow 280ms ease,border-color 280ms ease; }
+#expertise .capability-card { position:relative; display:flex; align-items:center; flex:0 0 222px; width:222px; min-height:80px; gap:12px; padding:15px; border:1px solid var(--line); border-radius:16px; background:var(--card); box-shadow:0 4px 12px color-mix(in srgb, var(--shadow-color) 20%, transparent); transform:translate3d(0,0,0); transition:transform 280ms ease,box-shadow 280ms ease,border-color 280ms ease; }
 #expertise .capability-logo { flex:none; display:grid; place-items:center; width:44px; height:44px; border-radius:12px; background:color-mix(in srgb,var(--brand) 7%,white); }
 #expertise .capability-logo img { display:block; width:32px; height:32px; object-fit:contain; }
 #expertise .capability-copy { min-width:0; }
 #expertise .capability-copy strong { display:block; color:var(--ink); font-size:14px; line-height:1.4; font-weight:700; white-space:nowrap; }
 #expertise .capability-copy small { display:block; margin-top:4px; font-size:10px; line-height:1.4; color:var(--muted); white-space:nowrap; }
 #expertise .capability-stage:is(:hover,:focus-within) .capability-track { animation-play-state:paused; }
-#expertise .capability-card:is(:hover,:focus-visible) { z-index:3; transform:translate3d(0,-5px,22px) rotateX(3deg) rotateY(-3deg) scale(1.025); border-color:color-mix(in srgb,var(--brand) 50%,#60a5fa); box-shadow:0 12px 20px rgba(2,8,18,.35),0 0 18px color-mix(in srgb,var(--brand) 14%,transparent); }
+#expertise .capability-card:is(:hover,:focus-visible) { z-index:3; transform:translate3d(0,-5px,22px) rotateX(3deg) rotateY(-3deg) scale(1.025); border-color:color-mix(in srgb,var(--brand) 50%,var(--blue)); box-shadow:0 12px 20px color-mix(in srgb, var(--shadow-color) 35%, transparent),0 0 18px color-mix(in srgb,var(--brand) 14%,transparent); }
 #expertise .capability-card:focus-visible { outline:2px solid var(--link); outline-offset:3px; }
 #expertise .capability-stage:focus-within .capability-track { animation:none; transform:none; }
 #expertise .capability-stage:focus-within .capability-layers, #expertise .capability-stage:focus-within .capability-row { transform:none; }

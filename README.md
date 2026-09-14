@@ -100,3 +100,12 @@ The evaluation dataset contains profile, skills, projects, comparison, experienc
 - Add the chatbot as a completed RAG project to the knowledge base only after public end-to-end verification.
 
 The full delivery sequence is documented in `personal_portfolio_chatbot_implementation_plan.md`.
+# Portfolio themes
+
+The circular navigation control switches between Navy (the default) and White.
+`theme.js` restores `portfolio-theme` from localStorage before styles render, and
+updates `data-theme` on the document. Storage restrictions do not prevent switching.
+Palette tokens live in `navy-theme.css`; `theme-controls.css` handles the toggle,
+responsive navigation spacing, and 350ms transitions with reduced-motion support.
+Both files and the script are included in the static build. Source project images,
+certificates, and technology logos retain their original colors.

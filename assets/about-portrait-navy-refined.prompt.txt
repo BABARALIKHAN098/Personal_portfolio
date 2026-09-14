@@ -1,0 +1,5 @@
+Editor: built-in image_gen
+Output: assets/about-portrait-navy-refined.png
+Actual resolution: 1086x1448. Requested 4K dimensions were not honored by the editor, including on a second upscale attempt. Selected the first refined result for more natural detail.
+
+Use case: identity-preserve. Edit the supplied portrait for the About section of a portfolio. Produce a 4K portrait image at EXACTLY 2880 pixels wide by 3840 pixels tall (3:4). Increase clarity and resolve fine photographic detail in the eyes, hair, beard and shirt without crunchy oversharpening or plastic skin. Preserve the identical person's face, proportions, expression, natural skin tone, white T-shirt, crossed arms, pose and framing. Reduce the excessive blue appearance of the background: use an almost-flat dark navy #07111F matching the site, with no bright blue glow, cyan lighting or color cast on the subject. Background should be very dark restrained navy, not saturated blue. No added objects, text or watermark. Output the requested actual 2880x3840 resolution.

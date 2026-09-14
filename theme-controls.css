@@ -1,0 +1,52 @@
+/* Final theme integration: layout and existing motion stay in their own files. */
+.nav-links { order: 1; }
+.theme-toggle { order: 2; flex: 0 0 44px; width: 44px; height: 44px; margin-left: 12px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--link); background: var(--card); box-shadow: var(--shadow); cursor: pointer; transition: transform 350ms ease, background-color 350ms ease, color 350ms ease, border-color 350ms ease; }
+.theme-toggle[hidden] { display: none; }
+.theme-toggle svg { grid-area: 1 / 1; width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.theme-moon, [data-theme="white"] .theme-sun { display: none; }
+[data-theme="white"] .theme-moon { display: block; }
+.theme-toggle:hover { transform: rotate(12deg) scale(1.05); background: var(--hover-surface); border-color: var(--blue); }
+.theme-toggle:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.menu-toggle { order: 3; min-width: 44px; min-height: 44px; }
+/* Collapse before the additional control can crowd the desktop links. */
+@media (max-width: 1050px) {
+  .nav-links { position: absolute; top: 76px; left: 0; right: 0; display: none; padding: 12px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); box-shadow: var(--shadow); }
+  .nav-links.open { display: grid; gap: 4px; }
+  .nav-links.open a { min-height: 44px; display: flex; align-items: center; }
+  .menu-toggle { display: block; margin-left: 6px; }
+}
+@media (max-width: 380px) { .brand strong { font-size: 12px; } .theme-toggle { margin-left: 6px; } .nav { padding-left: 10px; padding-right: 8px; } }
+
+.btn-primary, .btn-small, .nav-links > .btn-small, #work .btn-primary,
+#work .filters button.active, .filters button.active, .filters button.active:hover,
+.chat-launcher, .chat-avatar, .chat-send, .brand > span, .footer-grid .brand span {
+  background: var(--button-bg); color: var(--button-ink); border-color: var(--button-bg);
+}
+.btn-primary:hover:not(:disabled), .btn-small:hover:not(:disabled), .nav-links > .btn-small:hover,
+#work .btn-primary:hover, #work .filters button.active:hover {
+  background: var(--button-hover); color: var(--button-ink); border-color: var(--button-hover);
+}
+#work { --project-bg: var(--card); --project-panel: var(--card); --project-border: var(--line); }
+.live-dot::before { background: var(--blue); }
+.social-actions .text-link { background: var(--card); border-color: var(--line); }
+.social-actions .text-link:hover { background: var(--hover-surface); color: var(--link); border-color: var(--blue); }
+.contact-list > a > span::before, .contact-list > div > span::before { background: var(--button-bg); color: var(--button-ink); border-color: var(--line); }
+#expertise .capability-logo { background: var(--logo-surface); }
+#expertise .capability-card:is(:hover,:focus-visible) { border-color: var(--blue); box-shadow: var(--depth-shadow); }
+.video-playback-settings select { color: var(--ink); background: var(--section-alt); border-color: var(--line); }
+input, textarea, .video-playback-settings select, .theme-toggle { border-color: var(--control-line); }
+dialog::backdrop { background: var(--backdrop); }
+/* Keep source artwork intact; interface frames, logos and captions adapt. */
+::selection { color: var(--button-ink); background: var(--button-bg); }
+body::selection { color: var(--button-ink); background: var(--button-bg); }
+
+/* Only during a switch; normal reveal, tilt and hover transitions remain intact. */
+html.theme-changing, .theme-changing *, .theme-changing *::before, .theme-changing *::after {
+  transition-property: background-color, color, border-color, box-shadow, fill, stroke, opacity, transform !important;
+  transition-duration: 350ms !important;
+  transition-delay: 0s !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  html.theme-changing, .theme-changing *, .theme-changing *::before, .theme-changing *::after, .theme-toggle { transition: none !important; }
+  .theme-toggle:hover { transform: none; }
+}

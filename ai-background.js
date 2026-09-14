@@ -2,6 +2,11 @@
   const canvas=document.getElementById('ai-background');
   if(!canvas)return;
   const ctx=canvas.getContext('2d',{alpha:true});
+  let accent=getComputedStyle(document.documentElement).getPropertyValue('--accent-rgb').trim();
+  document.addEventListener('themechange',()=>{
+    accent=getComputedStyle(document.documentElement).getPropertyValue('--accent-rgb').trim();
+    draw(performance.now(),true);
+  });
   const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)');
   const coarsePointer=matchMedia('(pointer: coarse)');
   let width=0,height=0,dpr=1,points=[],frame=0,running=true,scrollY=window.scrollY;
@@ -37,18 +42,18 @@
         const b=points[j],dx=b.x-a.x,dy=b.y-a.y,dist=Math.hypot(dx,dy);
         if(dist<maxDistance){
           const alpha=(1-dist/maxDistance)*.11;
-          ctx.strokeStyle=`rgba(96,165,250,${alpha})`;ctx.lineWidth=.8;
+          ctx.strokeStyle=`rgba(${accent},${alpha})`;ctx.lineWidth=.8;
           ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
           if(a.traveller&&!staticOnly&&!reduceMotion.matches){
             a.travel=(a.travel+.00032*(16.67))%1;
             const t=(a.travel+Math.sin(time*a.speed)*.08+1)%1;
-            ctx.fillStyle='rgba(37,99,235,.12)';ctx.beginPath();ctx.arc(a.x+dx*t,a.y+dy*t,1.7,0,Math.PI*2);ctx.fill();
+            ctx.fillStyle=`rgba(${accent},.12)`;ctx.beginPath();ctx.arc(a.x+dx*t,a.y+dy*t,1.7,0,Math.PI*2);ctx.fill();
           }
         }
       }
       const pulse=staticOnly?0:Math.sin(time*a.speed+a.phase)*.5+.5;
-      ctx.fillStyle=`rgba(37,99,235,${.07+pulse*.06})`;ctx.beginPath();ctx.arc(a.x,a.y,a.r,0,Math.PI*2);ctx.fill();
-      if(i%7===0){ctx.strokeStyle=`rgba(96,165,250,${.025+pulse*.025})`;ctx.beginPath();ctx.arc(a.x,a.y,a.r+5+pulse*4,0,Math.PI*2);ctx.stroke()}
+      ctx.fillStyle=`rgba(${accent},${.07+pulse*.06})`;ctx.beginPath();ctx.arc(a.x,a.y,a.r,0,Math.PI*2);ctx.fill();
+      if(i%7===0){ctx.strokeStyle=`rgba(${accent},${.025+pulse*.025})`;ctx.beginPath();ctx.arc(a.x,a.y,a.r+5+pulse*4,0,Math.PI*2);ctx.stroke()}
     }
     ctx.restore();
   }

@@ -3,7 +3,7 @@ import path from 'node:path';
 
 const root=process.cwd(),dist=path.join(root,'dist');
 const files=[
-  'index.html','robots.txt','sitemap.xml','styles.css','project-images.css','buttons.css','capabilities.css','capabilities.js',
+  'theme.js','theme-controls.css','index.html','robots.txt','sitemap.xml','styles.css','project-images.css','buttons.css','capabilities.css','capabilities.js',
   'social-icons.css','process.css','design-refinement.css','about.css','journey.css',
   'ai-background.css','chatbot.css','data.js','mental-health-project.js','app.js',
   'ai-background.js','chatbot.js','depth.css','depth.js','navy-theme.css','project-windows.css','latest-project.js'
